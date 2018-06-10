@@ -3,77 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Psychic Game</title>
-</head>
+  <title>Word Guess Game</title>
+  <script src="assets/javascript/game.js"></script>
 
 <body>
-  <h1>Psychic Game</h1>
+  <h1>Word Guess Game: Middle Earth Edition!</h1>
 
-  <h2>Guess what letter I am thinking...</h2>
+  <h2>Guess the word:</h2>
   <div id="game">
-    <p>Press a letter to begin!</p>
+    <p>Press any key to begin...</p>
   </div>
 
-  <script type="text/javascript">
-      
-    
-    var wins = 0;
-    var losses = 0;
-    var guessesLeft = 11;
-    var yourGuesses = [] ;
 
-    var computerChoices = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-  
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)]
-    
-      
-     
-    document.onkeyup = function(event) {
-
-         
-      var userGuess = event.key;
-
-      // writes to array to track guesses
-      
-      yourGuesses.push(userGuess);
-
-    
-      // logic to determine score
-        if (userGuess === computerGuess)  {
-          wins++;
-          guessesLeft = 11;
-          yourGuesses = [];
-          computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)]; 
-
-        } else  {
-          guessesLeft--;
-        };
-        
-        if (guessesLeft === 0) {
-          losses ++;
-          guessesLeft = 11;
-          yourGuesses = [];
-          computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-        }; 
-
-
-        
-
-        // html variable
-        var html =
-          "<p>You chose: " + userGuess + "</p>" +
-          // "<p>The computer chose: " + computerGuess + "</p>" +
-          "<p>Wins: " + wins + "</p>" +
-          "<p>Losses: " + losses + "</p>" +
-          "<p>Guesses Left: " + guessesLeft + "</p>" +
-          "<p>Your Guesses: " + yourGuesses + "</p>" ;
-
-        
-        document.querySelector("#game").innerHTML = html;
-      }
-   
-  </script>
 
 </body>
 
