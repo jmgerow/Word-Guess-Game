@@ -5,19 +5,31 @@
 var wins = 0;
 var losses = 0;
 var guessesLeft = 11;
-var yourGuesses = [] ;
+var yourGuesses = [];
 var wordLetters = [];
+var wordDisplay = [];
 
-var computerChoices = ["Frodo", "Bilbo", "Gandalf", "Smaug", "Shire", "Legolas", "Pippin", "Sauron"]
+
+var computerChoices = ["frodo", "bilbo", "gandalf", "smaug", "shire", "legolas", "pippin", "sauron"]
 
 
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)]
-
+ 
 var s = computerGuess;
     for (var i = 0; i < s.length; i++) {
-    wordLetters = (s.charAt(i));
+    wordLetters.push(s.charAt(i));
     }  
- 
+
+//identify characters for if else
+ var firstChar = (wordLetters[0]);
+ var secondChar = (wordLetters[1]);
+ var thirdChar = (wordLetters[2]);
+ var fourthChar = (wordLetters[3]);
+ var fifthChar = (wordLetters[4]);
+ var sixthChar = (wordLetters[5]);
+ var seventhChar = (wordLetters[6]);
+
+
 document.onkeyup = function(event) {
 
      
@@ -27,27 +39,80 @@ document.onkeyup = function(event) {
   
   yourGuesses.push(userGuess);
 
-  // need to write code to display spaces instead of word
-  // need to write code to identify when letters selected display in word
+  // need to write code to display the correct number of spaces for the word  
   // need to write code to track wins/loss
   // need to write code to reset game  
 
-  // logic to determine score
-    if (userGuess === computerGuess)  {
-      wins++;
-      guessesLeft = 11;
-      yourGuesses = [];
-      computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)]; 
 
-    } else  {
+  // logic to track guesses and display letters in word as they are guessed correctly
+    // if (sixthChar === "undefined") {
+    //     sixthChar = "";
+    // };
+    // if (seventhChar === "undefined") {
+    //     seventhChar = "";
+    // };
+
+    if (userGuess === firstChar) {  
+      wordDisplay[0] = userGuess;
+      
+    }
+    if (userGuess === secondChar){
+      wordDisplay[1] = userGuess;
+       
+    }
+    if (userGuess === thirdChar){
+      wordDisplay[2] = userGuess;
+       
+    }
+     if (userGuess === fourthChar){
+      wordDisplay[3] = userGuess;
+      
+    }
+    if (userGuess === fifthChar){
+      wordDisplay[4] = userGuess;
+       
+    }
+    if (userGuess === sixthChar){
+      wordDisplay[5] = userGuess;
+       
+    }
+    if (userGuess === seventhChar){
+      wordDisplay[6] = userGuess;
+       
+    }
+    else  {
       guessesLeft--;
     };
-    
+
+    // logic to reset game if won
+    if (wordLetters.length === wordDisplay.length) {
+        wins ++;
+        yourGuesses = [];
+        guessesLeft = 11;
+        computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        wordDisplay = [];
+        wordLetters = [];
+        s = computerGuess;
+            for (var i = 0; i < s.length; i++) {
+            wordLetters.push(s.charAt(i));
+    } 
+        //need to add code to rest wordDisplay
+        //wordLetters is not updating when resetting
+    };
+        
+
+    // logic to reset game if guesses are exhausted
     if (guessesLeft === 0) {
       losses ++;
       guessesLeft = 11;
       yourGuesses = [];
       computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      wordDisplay = [];
+      wordLetters = [];
+      s = computerGuess;
+            for (var i = 0; i < s.length; i++) {
+            wordLetters.push(s.charAt(i));
+    }           
     }; 
 
 
@@ -56,11 +121,19 @@ document.onkeyup = function(event) {
     // html variable
     var html =
       "<p>You chose: " + userGuess + "</p>" +
+      "<p>wordDisplay: " + wordDisplay + "</p>" +
       "<p>The computer chose: " + computerGuess + "</p>" +
       "<p>Wins: " + wins + "</p>" +
       "<p>Losses: " + losses + "</p>" +
       "<p>Guesses Left: " + guessesLeft + "</p>" +
-      "<p>Word: " + wordLetters + "</p>" +
+      "<p>wordLetters: " + wordLetters + "</p>" +
+      "<p>Word: " + firstChar + "</p>" +
+      "<p>Word: " + secondChar + "</p>" +
+      "<p>Word: " + thirdChar + "</p>" +
+      "<p>Word: " + fourthChar + "</p>" +
+      "<p>Word: " + fifthChar + "</p>" +
+      "<p>Word: " + sixthChar + "</p>" +
+      "<p>Word: " + seventhChar + "</p>" +
       "<p>Your Guesses: " + yourGuesses + "</p>" ;
 
     
