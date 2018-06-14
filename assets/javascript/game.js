@@ -11,6 +11,7 @@ var wordDisplay = [];
 
 
 
+
 var computerChoices = ["frodo", "bilbo", "gandalf", "smaug", "shire", "legolas", "pippin", "sauron"]
 
 
@@ -19,7 +20,12 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 var s = computerGuess;
     for (var i = 0; i < s.length; i++) {
     wordLetters.push(s.charAt(i));
-    }  
+    } 
+     
+var currentLength = computerGuess.length;
+for (var j = 0; j < currentLength; j++) {
+  wordDisplay[j] = "_";
+}
 
 //identify characters for if else
 
@@ -47,7 +53,9 @@ document.onkeyup = function(event) {
   
 
   // logic to track guesses and display letters in word as they are guessed correctly
-   
+    
+
+
     if (userGuess === firstChar) {  
       wordDisplay[0] = userGuess;
       
@@ -87,6 +95,7 @@ document.onkeyup = function(event) {
     // logic to reset game if won
     if (JSON.stringify(wordLetters) === JSON.stringify(wordDisplay)) {
         wins ++;
+        alert("You guessed " + computerGuess + " correctly!")
         yourGuesses = [];
         guessesLeft = 11;
         computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
@@ -102,13 +111,18 @@ document.onkeyup = function(event) {
         fourthChar = (wordLetters[3]);
         fifthChar = (wordLetters[4]);
         sixthChar = (wordLetters[5]);
-        seventhChar = (wordLetters[6]);    
+        seventhChar = (wordLetters[6]);
+        currentLength = computerGuess.length
+        for (var j = 0; j < currentLength; j++) {
+          wordDisplay[j] = "_";
+        }    
       
     }
     
     
     // logic to reset game if guesses are exhausted
     if (guessesLeft === 0) {
+      alert(computerGuess + " has eluded you!")
       losses ++;
       guessesLeft = 11;
       yourGuesses = [];
@@ -125,7 +139,11 @@ document.onkeyup = function(event) {
       fourthChar = (wordLetters[3]);
       fifthChar = (wordLetters[4]);
       sixthChar = (wordLetters[5]);
-      seventhChar = (wordLetters[6]); 
+      seventhChar = (wordLetters[6]);
+      currentLength = computerGuess.length
+      for (var j = 0; j < currentLength; j++) {
+        wordDisplay[j] = "_";
+      }     
                 
     }; 
 
@@ -135,7 +153,7 @@ document.onkeyup = function(event) {
     // html variable
     var html =
       "<p>You chose: " + userGuess + "</p>" +
-      "<p>wordDisplay: " + wordDisplay + "</p>" +
+      "<p>" + wordDisplay.join(" ") + "</p>" +
       // "<p>The computer chose: " + computerGuess + "</p>" +
       "<p>Wins: " + wins + "</p>" +
       "<p>Losses: " + losses + "</p>" +
@@ -149,7 +167,7 @@ document.onkeyup = function(event) {
       // "<p>Word: " + fifthChar + "</p>" +
       // "<p>Word: " + sixthChar + "</p>" +
       // "<p>Word: " + seventhChar + "</p>" +
-      "<p>Your Guesses: " + yourGuesses + "</p>" ;
+      "<p>Your Guesses:<br> " + yourGuesses.join(" ") + "</p>" ;
 
     
     document.querySelector("#game").innerHTML = html;
